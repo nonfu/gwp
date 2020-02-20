@@ -1,0 +1,23 @@
+ERROR 2020/02/12 23:04:02 utils.go:100: Error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'returning id, uuid, created_at' at line 1 Cannot create user
+ERROR 2020/02/12 23:04:25 utils.go:100: Error 1054: Unknown column '$1' in 'where clause' Cannot find user
+ERROR 2020/02/12 23:12:58 utils.go:100: Error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'returning id, uuid, created_at' at line 1 Cannot create user
+ERROR 2020/02/12 23:13:40 utils.go:100: sql: no rows in result set Cannot create user
+ERROR 2020/02/12 23:13:59 utils.go:100: sql: Scan error on column index 5, name "created_at": unsupported Scan, storing driver.Value type []uint8 into type *time.Time Cannot find user
+ERROR 2020/02/12 23:13:59 utils.go:100: sql: no rows in result set Cannot create session
+ERROR 2020/02/12 23:18:48 utils.go:100: sql: no rows in result set Cannot find user
+ERROR 2020/02/12 23:19:29 utils.go:100: sql: Scan error on column index 5, name "created_at": unsupported Scan, storing driver.Value type []uint8 into type *time.Time Cannot find user
+ERROR 2020/02/12 23:19:29 utils.go:100: sql: no rows in result set Cannot create session
+ERROR 2020/02/12 23:20:22 utils.go:100: sql: Scan error on column index 5, name "created_at": unsupported Scan, storing driver.Value type []uint8 into type *time.Time Cannot find user
+ERROR 2020/02/12 23:20:22 utils.go:100: sql: no rows in result set Cannot create session
+ERROR 2020/02/12 23:29:29 utils.go:100: sql: no rows in result set Cannot create session
+ERROR 2020/02/12 23:39:17 utils.go:100: sql: no rows in result set Cannot create session
+INFO 2020/02/12 23:43:02 utils.go:95: {0   0 0001-01-01 00:00:00 +0000 UTC}
+ERROR 2020/02/12 23:43:02 utils.go:100: sql: no rows in result set Cannot create session
+INFO 2020/02/12 23:57:05 utils.go:95: {0   0 0001-01-01 00:00:00 +0000 UTC}
+ERROR 2020/02/12 23:57:05 utils.go:100: Error 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'returning id, uuid, email, user_id, created_at' at line 1 Cannot create session
+INFO 2020/02/13 00:14:14 utils.go:95: {7 4f6ff854-b980-471a-4761-c728f5b0bc26 test@xueyuanjun.com 1 2020-02-12 16:14:15 +0000 UTC}
+INFO 2020/02/13 00:14:34 utils.go:95: {8 c272b475-1191-48b4-4278-fbe75d0396d2 test@xueyuanjun.com 1 2020-02-12 16:14:34 +0000 UTC}
+ERROR 2020/02/13 00:17:02 utils.go:100: sql: no rows in result set Cannot create post
+WARNING 2020/02/13 00:21:36 utils.go:105: <nil> Failed to get cookie
+INFO 2020/02/13 00:21:59 utils.go:95: {9 ebbe1a83-6b1c-4c4f-7b80-f9b09bc60164 test@xueyuanjun.com 1 2020-02-12 16:22:00 +0000 UTC}
+WARNING 2020/02/13 00:23:01 utils.go:105: <nil> Failed to get cookie

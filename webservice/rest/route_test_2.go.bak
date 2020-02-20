@@ -1,0 +1,68 @@
+package main
+
+import (
+	"encoding/json"
+	. "gopkg.in/check.v1"
+	"net/http"
+	"net/http/httptest"
+	"strings"
+	"testing"
+)
+
+type PostTestSuite struct {
+	mux    *http.ServeMux
+	post   *FakePost
+	writer *httptest.ResponseRecorder
+}
+
+func init() {
+	// 注册测试套件
+	Suite(&PostTestSuite{})
+}
+
+func Test(t *testing.T) {
+	// 与 testing 包集成
+	TestingT(t)
+}
+
+func (s *PostTestSuite) SetUpSuite(c *C) {
+	c.Log("Starting Post Test Suite")
+}
+
+func (s *PostTestSuite) TearDownSuite(c *C) {
+	c.Log("Finishing Post Test Suite")
+}
+
+func (s *PostTestSuite) SetUpTest(c *C) {
+	s.post = &FakePost{}
+	s.mux = http.NewServeMux()
+	s.mux.HandleFunc("/post", HandleRequest(s.post))
+	s.writer = httptest.NewRecorder()
+	c.Log("Starting test - ", c.TestName())
+}
+
+func (s *PostTestSuite) TearDownTest(c *C) {
+	c.Log("Finished test - ", c.TestName())
+}
+
+func (s *PostTestSuite) TestShowPost(c *C) {
+	request, _ := http.NewRequest("GET", "/post?id=1", nil)
+	s.mux.ServeHTTP(s.writer, request)
+
+	// 断言响应状态码是否是200
+	c.Check(s.writer.Code, Equals, 200)
+	var post Post
+	json.Unmarshal(s.writer.Body.Bytes(), &post)
+	// 断言post.Id值是否是1
+	c.Check(post.Id, Equals, 1)
+}
+
+func (s *PostTestSuite) TestUpdatePost(c *C) {
+	json := strings.NewReader(`{"title": "test post", "content": "update post", "author": "学院君"}`)
+	request, _ := http.NewRequest("PUT", "/post?id=1", json)
+	s.mux.ServeHTTP(s.writer, request)
+
+	c.Check(s.writer.Code, Equals, 200)
+	//c.Check(s.post.Id, Equals, 1)
+	//c.Check(s.post.Content, Equals, "update content")
+}

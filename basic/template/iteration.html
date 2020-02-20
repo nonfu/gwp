@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Iteration Actions</title>
+</head>
+<body>
+    <ul>
+        {{ range . }}
+            <li>{{ . }}</li>
+        {{ else }}
+            <p>Nothing to show</p>
+        {{ end }}
+    </ul>
+</body>
+</html>

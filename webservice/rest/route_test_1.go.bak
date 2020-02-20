@@ -1,0 +1,98 @@
+package main
+
+import (
+	"encoding/json"
+	"net/http"
+	"net/http/httptest"
+	"os"
+	"strings"
+	"testing"
+)
+
+var mux *http.ServeMux
+var writer *httptest.ResponseRecorder
+
+type FakePost struct {
+	Id      int
+	Title   string
+	Content string
+	Author  string
+}
+
+func (post *FakePost) Retrieve(id int) (err error) {
+	post.Id = id
+	return
+}
+
+func (post *FakePost) Create() (err error) {
+	return
+}
+
+func (post *FakePost) Update() (err error) {
+	return
+}
+
+func (post *FakePost) Delete() (err error) {
+	return
+}
+
+func TestMain(m *testing.M) {
+	setUp()
+	code := m.Run()
+	os.Exit(code)
+}
+
+func setUp() {
+	mux = http.NewServeMux()
+	mux.HandleFunc("/post", HandleRequest(&FakePost{}))
+}
+
+func TestCreatePost(t *testing.T) {
+	writer := httptest.NewRecorder()
+	// 将 json 字符串转化为 Reader 类型以便作为 HTTP 请求实体传入 http.NewRequest
+	json := strings.NewReader(`{"title": "second post", "content": "post content", "author": "学院君"}`)
+	request, _ := http.NewRequest("POST", "/post", json)
+	mux.ServeHTTP(writer, request)
+
+	if writer.Code != 200 {
+		t.Errorf("Post create failed. Response code is %v", writer.Code)
+	}
+}
+
+func TestShowPost(t *testing.T) {
+	writer := httptest.NewRecorder()
+	request, _ := http.NewRequest("GET", "/post?id=1", nil)
+	mux.ServeHTTP(writer, request)
+
+	if writer.Code != 200 {
+		t.Errorf("Response code is %v", writer.Code)
+	}
+
+	var post Post
+	json.Unmarshal(writer.Body.Bytes(), &post)
+	if post.Id != 1 {
+		t.Error("Cannot retrieve JSON post")
+	}
+}
+
+func TestUpdatePost(t *testing.T) {
+	writer := httptest.NewRecorder()
+	// 将 json 字符串转化为 Reader 类型以便作为 HTTP 请求实体传入 http.NewRequest
+	json := strings.NewReader(`{"content": "update post", "author": "学院君"}`)
+	request, _ := http.NewRequest("PUT", "/post?id=1", json)
+	mux.ServeHTTP(writer, request)
+
+	if writer.Code != 200 {
+		t.Errorf("Post update failed. Response code is %v", writer.Code)
+	}
+}
+
+func TestDeletePost(t *testing.T) {
+	writer := httptest.NewRecorder()
+	request, _ := http.NewRequest("DELETE", "/post?id=1", nil)
+	mux.ServeHTTP(writer, request)
+
+	if writer.Code != 200 {
+		t.Errorf("Post delete failed. Response code is %v", writer.Code)
+	}
+}

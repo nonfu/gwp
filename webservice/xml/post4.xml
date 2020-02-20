@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<post id="1">
+	<content>Hello XML</content>
+	<author id="1">学院君</author>
+	<comments>
+		<comment id="1">Comment1
+			<author id="1">学院君</author>
+		</comment>
+		<comment id="2">Comment2
+			<author id="1">学院君</author>
+		</comment>
+	</comments>
+</post>
