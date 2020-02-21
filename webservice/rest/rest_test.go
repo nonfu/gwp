@@ -43,27 +43,3 @@ var _ = Describe("Rest", func() {
 		})
 	})
 })
-
-type FakePost struct {
-	Id      int
-	Title   string
-	Content string
-	Author  string
-}
-
-func (post *FakePost) Retrieve(id int) (err error) {
-	post.Id = id
-	return
-}
-
-func (post *FakePost) Create() (err error) {
-	return
-}
-
-func (post *FakePost) Update() (err error) {
-	return
-}
-
-func (post *FakePost) Delete() (err error) {
-	return
-}
