@@ -18,7 +18,8 @@ WORKDIR /app/rest-web-service
 COPY . .
 
 # 下载依赖
-RUN go env -w GOPROXY=https://goproxy.io,direct && go mod tidy
+RUN go env -w GOPROXY=https://goproxy.io,direct && \
+	go mod tidy
 
 # 构建二进制文件，添加来一些额外参数以便可以在 Alpine 中运行它
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o rest-web-service
