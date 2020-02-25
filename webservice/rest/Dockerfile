@@ -41,6 +41,6 @@ WORKDIR /app
 COPY --from=builder /app/rest-web-service/rest-web-service .
 
 # 启动商品服务
-CMD ["./rest-web-service"]
+ENTRYPOINT ["./rest-web-service"]
 
 EXPOSE 8080
